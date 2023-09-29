@@ -1,0 +1,14 @@
+
+
+Objectif de l'application :
+
+
+Fonctionnalité principal de l'application : Réseau social permettant aux utilisateurs de visualiser et d'ajouter les infos des films à son compte et d'avoir la possiblité de les partager à d'autres personnes.
+
+
+
+L'utilisateur  :
+	* doit se créer un compte pour se connecter à l'application
+	* une fois connecté, arrive sur la page d'accueil contenant : une liste de film populaire du moment, un filtre + barre de recherche, une bar de navigation et un footer
+	* peut ajouté un ou plusieurs films à sa liste de film à regarder. Cette liste est modifiable (ajout ou suppression du film ainsi qu'un état -> vu ou non vu)
+	* peut partager sa liste de film aux amis.
