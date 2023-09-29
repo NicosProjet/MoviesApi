@@ -1,10 +1,12 @@
 package com.moviesApi.services;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.moviesApi.dto.DtoTools;
 import com.moviesApi.dto.UserDto;
@@ -12,7 +14,7 @@ import com.moviesApi.entities.User;
 import com.moviesApi.repositories.UserRepository;
 import com.moviesApi.tools.HashTools;
 
-
+@Service
 public class UserServiceImpl implements UserService {
 	
 	@Autowired

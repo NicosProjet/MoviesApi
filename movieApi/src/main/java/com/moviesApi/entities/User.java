@@ -36,7 +36,7 @@ public class User implements Serializable {
     private Set<User> friends;
 	
 	@ElementCollection
-	private List<Long> movieIds; 
+	private List<Long> moviesId; 
 	
 	public User() {
 		
@@ -44,7 +44,7 @@ public class User implements Serializable {
 
 
 	public User(long id, String firstName, String lastName, String email, String password, Set<User> friends,
-			List<Long> movieIds) {
+			List<Long> moviesId) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -52,20 +52,20 @@ public class User implements Serializable {
 		this.email = email;
 		this.password = password;
 		this.friends = friends;
-		this.movieIds = movieIds;
+		this.moviesId = moviesId;
 	}
 
 
 
 	public List<Long> getMovieIds() {
-		return movieIds;
+		return moviesId;
 	}
 
 
 
 
-	public void setMovieIds(List<Long> movieIds) {
-		this.movieIds = movieIds;
+	public void setMovieIds(List<Long> moviesId) {
+		this.moviesId = moviesId;
 	}
 
 
