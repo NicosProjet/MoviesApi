@@ -3,72 +3,65 @@ package com.moviesApi.entities;
 
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.MapKeyColumn;
+import javax.persistence.PostLoad;
+import javax.persistence.Transient;
+
+import com.moviesApi.tools.MovieInfoConverter;
 
 @SuppressWarnings("serial")
 @Entity
 public class User implements Serializable {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	
 
-	private String firstName;
-	
-	private String lastName;
-	
-	@Column(unique = true, nullable = false)
-	private String email;
-	
-	@Column(nullable = false)
-	private String password;
-	
-	@ManyToMany
-    private Set<User> friends;
-	
-	@ElementCollection
-	private List<Long> moviesId; 
-	
-	public User() {
-		
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
+    private String firstName;
 
-	public User(long id, String firstName, String lastName, String email, String password, Set<User> friends,
-			List<Long> moviesId) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-		this.friends = friends;
-		this.moviesId = moviesId;
-	}
+    private String lastName;
 
+    @Column(unique = true, nullable = false)
+    private String email;
 
+    @Column(nullable = false)
+    private String password;
 
-	public List<Long> getMovieIds() {
-		return moviesId;
-	}
+    // Map pour stocker les informations sur les films (id du film -> MovieInfo)
+    @ElementCollection
+    @CollectionTable(name = "user_movies")
+    @MapKeyColumn(name = "movie_id")
+    @Convert(converter = MovieInfoConverter.class) // Convertisseur personnalisé
+    private Map<Long, MovieInfo> moviesInfo;
 
+    public User() {
 
+    }
 
-
-	public void setMovieIds(List<Long> moviesId) {
-		this.moviesId = moviesId;
-	}
-
-
+    public User(long id, String firstName, String lastName, String email, String password,
+            Map<Long, MovieInfo> moviesInfo) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.moviesInfo = moviesInfo;
+    }
 
 	public long getId() {
 		return id;
@@ -110,13 +103,15 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public Set<User> getFriends() {
-		return friends;
+	public Map<Long, MovieInfo> getMoviesInfo() {
+		return moviesInfo;
 	}
 
-	public void setFriends(Set<User> friends) {
-		this.friends = friends;
+	public void setMoviesInfo(Map<Long, MovieInfo> moviesInfo) {
+		this.moviesInfo = moviesInfo;
 	}
+    
+    
 	
 	
 }
