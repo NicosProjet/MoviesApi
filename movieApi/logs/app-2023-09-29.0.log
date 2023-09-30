@@ -1,0 +1,40 @@
+2023-09-29 23:02:55.111  INFO 4072 --- [main] com.moviesApi.MovieApiApplication        : Starting MovieApiApplication using Java 21 on DESKTOP-L5ERBV8 with PID 4072 (C:\Users\Nico\Desktop\Projet\movieApi\target\classes started by Nico in C:\Users\Nico\Desktop\Projet\movieApi)
+2023-09-29 23:02:55.114  INFO 4072 --- [main] com.moviesApi.MovieApiApplication        : No active profile set, falling back to default profiles: default
+2023-09-29 23:02:55.700  INFO 4072 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-29 23:02:55.761  INFO 4072 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 49 ms. Found 1 JPA repository interfaces.
+2023-09-29 23:02:56.371  INFO 4072 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-09-29 23:02:56.384  INFO 4072 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-09-29 23:02:56.384  INFO 4072 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2023-09-29 23:02:56.475  INFO 4072 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-09-29 23:02:56.475  INFO 4072 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1313 ms
+2023-09-29 23:02:56.657  INFO 4072 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-29 23:02:56.710  INFO 4072 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.4.Final
+2023-09-29 23:02:56.864  INFO 4072 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-09-29 23:02:56.954  INFO 4072 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-09-29 23:02:57.014  INFO 4072 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-09-29 23:02:57.028  INFO 4072 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MariaDBDialect
+2023-09-29 23:02:57.637  INFO 4072 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-29 23:02:57.645  INFO 4072 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-29 23:02:57.914  WARN 4072 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-29 23:02:58.242  INFO 4072 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-09-29 23:02:58.251  INFO 4072 --- [main] com.moviesApi.MovieApiApplication        : Started MovieApiApplication in 3.556 seconds (JVM running for 3.943)
+2023-09-29 23:03:31.342  INFO 17288 --- [main] com.moviesApi.MovieApiApplication        : Starting MovieApiApplication using Java 21 on DESKTOP-L5ERBV8 with PID 17288 (C:\Users\Nico\Desktop\Projet\movieApi\target\classes started by Nico in C:\Users\Nico\Desktop\Projet\movieApi)
+2023-09-29 23:03:31.345  INFO 17288 --- [main] com.moviesApi.MovieApiApplication        : No active profile set, falling back to default profiles: default
+2023-09-29 23:03:31.944  INFO 17288 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-29 23:03:32.003  INFO 17288 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 48 ms. Found 1 JPA repository interfaces.
+2023-09-29 23:03:32.596  INFO 17288 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-09-29 23:03:32.612  INFO 17288 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-09-29 23:03:32.613  INFO 17288 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.56]
+2023-09-29 23:03:32.715  INFO 17288 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-09-29 23:03:32.715  INFO 17288 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1318 ms
+2023-09-29 23:03:32.928  INFO 17288 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-29 23:03:32.980  INFO 17288 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.4.Final
+2023-09-29 23:03:33.144  INFO 17288 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-09-29 23:03:33.232  INFO 17288 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-09-29 23:03:33.298  INFO 17288 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-09-29 23:03:33.314  INFO 17288 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MariaDBDialect
+2023-09-29 23:03:33.986  INFO 17288 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-29 23:03:33.993  INFO 17288 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-29 23:03:34.277  WARN 17288 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-29 23:03:34.627  INFO 17288 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-09-29 23:03:34.638  INFO 17288 --- [main] com.moviesApi.MovieApiApplication        : Started MovieApiApplication in 3.725 seconds (JVM running for 4.128)

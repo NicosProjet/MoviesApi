@@ -2,7 +2,10 @@ package com.moviesApi.services;
 
 import java.util.List;
 
+import com.moviesApi.dto.LoginDto;
+import com.moviesApi.dto.LoginResponseDto;
 import com.moviesApi.dto.UserDto;
+
 
 public interface UserService {
 	
@@ -13,5 +16,9 @@ public interface UserService {
 	UserDto saveOrUpdate(UserDto uDto);
 	
 	void delete(long id);
+	
+	LoginResponseDto checkLogin(LoginDto loginDto) throws Exception;
+	
+	UserDto findByEmail(String email) throws Exception;
 
 }

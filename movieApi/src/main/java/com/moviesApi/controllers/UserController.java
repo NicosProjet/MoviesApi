@@ -1,5 +1,7 @@
 package com.moviesApi.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +36,13 @@ public class UserController {
 				.status(HttpStatus.CREATED)
 				.body(result);
 	}
+	
+
+	@GetMapping(produces = "application/json")
+	public List<UserDto> getAll() {
+		return userService.getAll();
+	}
+	
 	//READ
 	@GetMapping(value="/{id}", produces = "application/json")
 	public UserDto getById(@PathVariable("id") long id){

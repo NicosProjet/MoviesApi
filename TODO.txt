@@ -12,3 +12,12 @@ L'utilisateur  :
 	* une fois connecté, arrive sur la page d'accueil contenant : une liste de film populaire du moment, un filtre + barre de recherche, une bar de navigation et un footer
 	* peut ajouté un ou plusieurs films à sa liste de film à regarder. Cette liste est modifiable (ajout ou suppression du film ainsi qu'un état -> vu ou non vu)
 	* peut partager sa liste de film aux amis.
+
+
+TODO : 
+
+	 - vérifier les méthodes du UserServiceImpl
+	 - ajout du JWToken
+	 - ajouter CheckLogin 
+	 - ajouter EmailSender
+	 - ajouter la méthode addFriend()
