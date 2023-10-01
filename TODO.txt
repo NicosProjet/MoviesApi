@@ -16,8 +16,9 @@ L'utilisateur  :
 
 TODO : 
 
-	 - vérifier les méthodes du UserServiceImpl
-	 - ajout du JWToken
-	 - ajouter CheckLogin 
+	 - vérifier les méthodes du UserServiceImpl -> OK
+	 - ajout du JWToken -> OK
+	 - ajouter CheckLogin -> OK
+	 - ajouter la méthode addFriend() et deleteFriend() -> OK
 	 - ajouter EmailSender
-	 - ajouter la méthode addFriend()
+	 

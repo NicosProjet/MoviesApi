@@ -22,20 +22,20 @@ import com.moviesApi.tools.TokenSaver;
 
 @Service
 public class UserServiceImpl implements UserService {
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 
 	@Override
 	public UserDto saveOrUpdate(UserDto uDto) {
-		
+
 		User u = DtoTools.convert(uDto, User.class);
 		try {
 			if (u.getId() == 0) { // insertion
-				
+
 				u.setPassword(HashTools.hashSHA512(u.getPassword()));
 			} else { // modif
 				UserDto userInDb = getById(u.getId());
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 			e.printStackTrace();
 		}
 		u = userRepository.saveAndFlush(u);
-		
+
 		return DtoTools.convert(u, UserDto.class);
 
 	}
@@ -72,13 +72,13 @@ public class UserServiceImpl implements UserService {
 
 		return null;
 	}
-	
+
 	@Override
 	public void delete(long id) {
 		userRepository.deleteById(id);
 	}
-	
-	
+
+
 	@Override
 	public LoginResponseDto checkLogin(LoginDto loginDto) throws Exception {
 		User u = userRepository.findByEmail(loginDto.getEmail());
@@ -105,16 +105,85 @@ public class UserServiceImpl implements UserService {
 	public UserDto findByEmail(String email) throws Exception {
 		// TODO Auto-generated method stub
 		User userByEmail = userRepository.findByEmail(email);
-		
+
 		if(userByEmail != null) {
-			
+
 			return DtoTools.convert(userByEmail, UserDto.class);
 		}
 		else {
 			throw new Exception("User not found !");
 		}
-		
+
 	}
-	
+
+	@Override
+	public void addFriend(long userId, long friendId) {
+		// TODO Auto-generated method stub
+		Optional<User> userOptional = userRepository.findById(userId);
+		Optional<User> friendOptional = userRepository.findById(friendId);
+
+		if(userOptional.isPresent() && friendOptional.isPresent()) {
+			User user = userOptional.get();
+			User friend = friendOptional.get();
+
+			user.getFriends().add(friend);
+			friend.getFriends().add(user);
+
+			if (user.getFriends().contains(friend)) {
+				// Les utilisateurs sont déjà amis, renvoie un message approprié
+				throw new IllegalArgumentException("Vous êtes déjà amis avec cette personne.");
+			}
+
+			userRepository.save(user);
+			userRepository.save(friend);
+		} else {
+
+			if (!userOptional.isPresent()) {
+
+				throw new IllegalArgumentException("L'utilisateur avec l'ID " + userId + " n'existe pas.");
+			}
+
+			if (!friendOptional.isPresent()) {
+				// L'ami avec friendId n'existe pas
+				throw new IllegalArgumentException("L'ami avec l'ID " + friendId + " n'existe pas.");
+			}
+		}
+
+
+	}
+
+	@Override
+	public void deleteFriend(long userId, long friendId) {
+		// TODO Auto-generated method stub
+		Optional<User> userOptional = userRepository.findById(userId);
+		Optional<User> friendOptional = userRepository.findById(friendId);
+
+		if(userOptional.isPresent() && friendOptional.isPresent() && !friendOptional.isEmpty()) {
+			User user = userOptional.get();
+			User friend = friendOptional.get();
+			// Supprimer l'ami de la liste d'amis de l'utilisateur
+			user.getFriends().remove(friend);
+
+			// Supprimer l'utilisateur de la liste d'amis de l'ami
+			friend.getFriends().remove(user);
+
+			// Enregistrer les modifications dans la base de données
+			userRepository.save(user);
+			userRepository.save(friend);
+		}else {
+			// Gérer le cas où l'id d'une personne n'existe pas
+			if (!userOptional.isPresent()) {
+				// L'utilisateur avec userId n'existe pas
+				throw new IllegalArgumentException("L'utilisateur avec l'ID " + userId + " n'existe pas.");
+			}
+
+			if (!friendOptional.isPresent()) {
+				// L'ami avec friendId n'existe pas
+				throw new IllegalArgumentException("L'ami avec l'ID " + friendId + " n'existe pas.");
+			}
+		}
+
+	}
+
 
 }

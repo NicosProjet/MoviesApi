@@ -67,4 +67,26 @@ public class UserController {
             throw new Exception("Erreur suppression impossible");
         }
 	}
+	
+	@PostMapping("/{userId}/add-friend/{friendId}")
+    public ResponseEntity<String> addFriend(@PathVariable Long userId, @PathVariable Long friendId) {
+        try {
+            userService.addFriend(userId, friendId);
+            return ResponseEntity.ok("Ami ajouté avec succès.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Erreur lors de l'ajout de l'ami : " + e.getMessage());
+        }
+    }
+	
+
+    @DeleteMapping("/{userId}/delete-friend/{friendId}")
+    public ResponseEntity<String> deleteFriend(@PathVariable Long userId, @PathVariable Long friendId) {
+        try {
+            userService.deleteFriend(userId, friendId);
+            return ResponseEntity.ok("Ami supprimé avec succès.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Erreur lors de la suppression de l'ami : " + e.getMessage());
+        }
+    }
+	
 }

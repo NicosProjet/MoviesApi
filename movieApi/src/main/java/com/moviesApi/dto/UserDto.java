@@ -3,8 +3,10 @@ package com.moviesApi.dto;
 
 
 import java.util.Map;
+import java.util.Set;
 
 import com.moviesApi.entities.MovieInfo;
+import com.moviesApi.entities.User;
 
 
 public class UserDto {
@@ -23,13 +25,15 @@ public class UserDto {
  // Convertisseur personnalisé
     private Map<Long, MovieInfo> moviesInfo;
 
+    private Set<User> friends;
     
     public UserDto() {
     }
 
 
+	
 	public UserDto(long id, String firstName, String lastName, String email, String password,
-			Map<Long, MovieInfo> moviesInfo) {
+			Map<Long, MovieInfo> moviesInfo, Set<User> friends) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -37,7 +41,23 @@ public class UserDto {
 		this.email = email;
 		this.password = password;
 		this.moviesInfo = moviesInfo;
+		this.friends = friends;
 	}
+
+
+
+	public Set<User> getFriends() {
+		return friends;
+	}
+
+
+
+
+	public void setFriends(Set<User> friends) {
+		this.friends = friends;
+	}
+
+
 
 
 	public long getId() {

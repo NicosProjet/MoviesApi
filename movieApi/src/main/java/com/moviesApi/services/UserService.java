@@ -20,5 +20,10 @@ public interface UserService {
 	LoginResponseDto checkLogin(LoginDto loginDto) throws Exception;
 	
 	UserDto findByEmail(String email) throws Exception;
+	
+	void addFriend(long userId, long friendId);
+	
+	void deleteFriend(long userId, long friendId);
+	
 
 }
