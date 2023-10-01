@@ -8,6 +8,10 @@ public class MovieInfoDto {
     
 
 
+	public MovieInfoDto() {
+		super();
+	}
+
 	public MovieInfoDto(Long id, boolean hasSeen, int rating) {
 		super();
 		this.id = id;
@@ -38,6 +42,8 @@ public class MovieInfoDto {
 	public void setRating(int rating) {
 		this.rating = rating;
 	} 
+	
+	
     
 	
     

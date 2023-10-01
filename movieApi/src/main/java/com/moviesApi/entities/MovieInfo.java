@@ -18,6 +18,10 @@ public class MovieInfo {
 
 
 
+	public MovieInfo() {
+		super();
+	}
+
 	public MovieInfo(Long id, boolean hasSeen, int rating) {
 		super();
 		this.id = id;

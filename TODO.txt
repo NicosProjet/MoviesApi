@@ -20,5 +20,7 @@ TODO :
 	 - ajout du JWToken -> OK
 	 - ajouter CheckLogin -> OK
 	 - ajouter la méthode addFriend() et deleteFriend() -> OK
+	 - ajouté la méthode addMovieToList() -> OK
+	 - modifié la méthode Update() de MovieInfoServiceImpl
 	 - ajouter EmailSender
 	 
