@@ -2,6 +2,7 @@ package com.moviesApi.services;
 
 import java.util.List;
 
+import com.moviesApi.dto.ChangePwdDto;
 import com.moviesApi.dto.LoginDto;
 import com.moviesApi.dto.LoginResponseDto;
 import com.moviesApi.dto.UserDto;
@@ -24,6 +25,8 @@ public interface UserService {
 	void addFriend(long userId, long friendId);
 	
 	void deleteFriend(long userId, long friendId);
+
+	boolean resetPassword(ChangePwdDto changePwdObj) throws Exception;
 	
 
 }

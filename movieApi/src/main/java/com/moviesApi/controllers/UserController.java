@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.moviesApi.dto.UserDto;
+import com.moviesApi.services.SendEmailService;
 import com.moviesApi.services.UserService;
 
 
@@ -25,13 +26,24 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private SendEmailService sendEmailservice;
+
+	
 	//CRUD pour l'entité USER
 	
 	//CREATE
 	@PostMapping(consumes="application/json", produces = "application/json")
 	public ResponseEntity<UserDto> save(@RequestBody UserDto uDto){
-		UserDto result = userService.saveOrUpdate(uDto);
-	
+		
+		String to = uDto.getEmail();
+		
+        String subject = "Bienvenue sur l'application";
+        String body = "Bonjour " + uDto.getFirstName() + " " +uDto.getLastName()+ ",\n\nBienvenue sur notre application.";
+        
+        UserDto result = userService.saveOrUpdate(uDto);
+        sendEmailservice.sendEmail(to, subject, body);
+
 		return ResponseEntity
 				.status(HttpStatus.CREATED)
 				.body(result);

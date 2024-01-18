@@ -1,4 +1,4 @@
-package com.moviesApi.controllers;
+package com.moviesApi.dto;
 
 import java.io.Serializable;
 

@@ -21,6 +21,7 @@ TODO :
 	 - ajouter CheckLogin -> OK
 	 - ajouter la méthode addFriend() et deleteFriend() -> OK
 	 - ajouté la méthode addMovieToList() -> OK
-	 - modifié la méthode Update() de MovieInfoServiceImpl
-	 - ajouter EmailSender
-	 
+	 - modifié la méthode Update() de MovieInfoServiceImpl -> OK
+	 - ajouter EmailSender -> OK
+	 - reset and change password -> ok
+

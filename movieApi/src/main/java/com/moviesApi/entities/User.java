@@ -5,6 +5,8 @@ package com.moviesApi.entities;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
@@ -16,7 +18,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.MapKey;
+import javax.persistence.MapKeyColumn;
+import javax.persistence.OneToMany;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.moviesApi.tools.MovieInfoConverter;
 
 @SuppressWarnings("serial")
@@ -39,8 +46,9 @@ public class User implements Serializable {
     private String password;
 
     // Map pour stocker les informations sur les films (id du film -> MovieInfo)
-    @ElementCollection
-    @CollectionTable(name = "user_movies")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @MapKey(name = "id")
+    @JsonManagedReference
     @Convert(converter = MovieInfoConverter.class, attributeName = "value") // Convertisseur personnalisé
     private Map<Long, MovieInfo> moviesInfo;
     

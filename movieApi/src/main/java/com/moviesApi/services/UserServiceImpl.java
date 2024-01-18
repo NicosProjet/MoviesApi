@@ -1,6 +1,7 @@
 package com.moviesApi.services;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,8 @@ import com.moviesApi.repositories.UserRepository;
 import com.moviesApi.tools.HashTools;
 import com.moviesApi.tools.JwtTokenUtil;
 import com.moviesApi.tools.TokenSaver;
+
+import com.moviesApi.dto.ChangePwdDto;
 
 
 @Service
@@ -96,8 +99,10 @@ public class UserServiceImpl implements UserService {
 			// le sauvegarder côté service pour pouvoir le vérifier lors des prochaines
 			// requêtes
 			result.setToken(token);
+			System.out.println(result);
 			return result;
 		} else
+			System.out.println("test");
 			throw new Exception("Error : invalid credentials !");
 	}
 
@@ -126,13 +131,15 @@ public class UserServiceImpl implements UserService {
 			User user = userOptional.get();
 			User friend = friendOptional.get();
 
-			user.getFriends().add(friend);
-			friend.getFriends().add(user);
-
 			if (user.getFriends().contains(friend)) {
 				// Les utilisateurs sont déjà amis, renvoie un message approprié
 				throw new IllegalArgumentException("Vous êtes déjà amis avec cette personne.");
 			}
+			
+			user.getFriends().add(friend);
+			friend.getFriends().add(user);
+
+			
 
 			userRepository.save(user);
 			userRepository.save(friend);
@@ -183,6 +190,31 @@ public class UserServiceImpl implements UserService {
 			}
 		}
 
+	}
+	
+	@Override
+	public boolean resetPassword(ChangePwdDto changePwdObj) throws Exception {
+		boolean expired = jwtTokenUtil.isTokenExpired(changePwdObj.getToken());
+		if (expired)
+			throw new Exception("Error : Expired token, ask for reset again !");
+
+		String newPassword = HashTools.hashSHA512(changePwdObj.getPassword());
+		
+		//récupérer l'utilisateur par email	
+		String email = jwtTokenUtil.getUsernameFromToken(changePwdObj.getToken());
+		User u = userRepository.findByEmail(email);
+		
+		if(u!=null) {
+			String currentPwd = u.getPassword();
+			
+			if(newPassword.equals(currentPwd))
+				throw new Exception("Error : updating with the same old password !");
+			
+			u.setPassword(newPassword);
+			userRepository.saveAndFlush(u);
+			return true;
+		}
+		return false;
 	}
 
 

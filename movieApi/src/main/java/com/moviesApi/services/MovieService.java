@@ -9,9 +9,7 @@ import com.moviesApi.dto.MovieInfoDto;
 
 public interface MovieService {
 	
-	Map<Long, MovieInfoDto> addMovieToUser(long userId, MovieInfoDto movieInfo);
 
-	
 	List<MovieInfoDto> getAll();
 	
 	MovieInfoDto getById(long id);
