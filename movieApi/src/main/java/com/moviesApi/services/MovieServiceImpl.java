@@ -25,55 +25,55 @@ public class MovieServiceImpl implements MovieService {
 
 	@Autowired
 	private MovieRepository movieRepository;
-	
-	
+
+
 	@Override
 	public MovieInfoDto saveOrUpdate(long userId, MovieInfoDto mDto) {
-	    MovieInfo m = DtoTools.convert(mDto, MovieInfo.class);
+		MovieInfo m = DtoTools.convert(mDto, MovieInfo.class);
 
-	    // Vérifiez si l'ID du film est égal à 0
-	    if (m.getId() == 0) {
-	        
-	        Optional<User> userOptional = userRepository.findById(userId);
+		// Vérifiez si l'ID du film est égal à 0
+		if (m.getId() == 0) {
 
-	        if (userOptional.isPresent()) {
-	            User user = userOptional.get();
-	            m.setUser(user);  // Associer le film à l'utilisateur
-	            m = movieRepository.saveAndFlush(m);
-	            mDto.setId(m.getId());
-	        } else {
-	            throw new IllegalArgumentException("L'utilisateur avec l'ID " + userId + " n'existe pas.");
-	        }
-	    } else {
-	        // Le film existe déjà, vérifiez s'il appartient à l'utilisateur
-	        Optional<User> userOptional = userRepository.findById(userId);
+			Optional<User> userOptional = userRepository.findById(userId);
 
-	        if (userOptional.isPresent()) {
-	            User user = userOptional.get();
-	            Map<Long, MovieInfo> userMoviesInfo = user.getMoviesInfo();
+			if (userOptional.isPresent()) {
+				User user = userOptional.get();
+				m.setUser(user);  // Associer le film à l'utilisateur
+				m = movieRepository.saveAndFlush(m);
+				mDto.setId(m.getId());
+			} else {
+				throw new IllegalArgumentException("L'utilisateur avec l'ID " + userId + " n'existe pas.");
+			}
+		} else {
+			// Le film existe déjà, vérifiez s'il appartient à l'utilisateur
+			Optional<User> userOptional = userRepository.findById(userId);
 
-	            if (userMoviesInfo.containsKey(m.getId())) {
-	                // Mettez à jour les propriétés du film existant avec celles du DTO
-	                MovieInfo existingMovie = userMoviesInfo.get(m.getId());
-	                existingMovie.setRating(m.getRating());
-	                existingMovie.setHasSeen(m.isHasSeen());
+			if (userOptional.isPresent()) {
+				User user = userOptional.get();
+				Map<Long, MovieInfo> userMoviesInfo = user.getMoviesInfo();
 
-	                // Enregistrez les modifications dans la base de données
-	                movieRepository.saveAndFlush(existingMovie);
-	            } else {
-	                throw new IllegalArgumentException("Le film n'appartient pas à l'utilisateur.");
-	            }
-	        } else {
-	            throw new IllegalArgumentException("L'utilisateur avec l'ID " + userId + " n'existe pas.");
-	        }
-	    }
+				if (userMoviesInfo.containsKey(m.getId())) {
+					// Mettez à jour les propriétés du film existant avec celles du DTO
+					MovieInfo existingMovie = userMoviesInfo.get(m.getId());
+					existingMovie.setRating(m.getRating());
+					existingMovie.setHasSeen(m.isHasSeen());
 
-	    return mDto;
+					// Enregistrez les modifications dans la base de données
+					movieRepository.saveAndFlush(existingMovie);
+				} else {
+					throw new IllegalArgumentException("Le film n'appartient pas à l'utilisateur.");
+				}
+			} else {
+				throw new IllegalArgumentException("L'utilisateur avec l'ID " + userId + " n'existe pas.");
+			}
+		}
+
+		return mDto;
 	}
 
 
 
-	
+
 
 
 

@@ -13,25 +13,25 @@ import com.fasterxml.jackson.annotation.JsonIdentityReference;
 
 @Entity
 public class MovieInfo {
-	
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-	
-    private boolean hasSeen;
-    private int rating; 
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @JsonBackReference
-    @JsonIdentityReference(alwaysAsId = true)
-    private User user;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	private boolean hasSeen;
+	private int rating; 
+
+	@ManyToOne
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	@JsonBackReference
+	@JsonIdentityReference(alwaysAsId = true)
+	private User user;
 
 	public MovieInfo() {
 		super();
 	}
 
-	
+
 
 	public MovieInfo(Long id, boolean hasSeen, int rating, User user) {
 		super();
@@ -75,5 +75,5 @@ public class MovieInfo {
 		this.user = user;
 	}
 
-    
+
 }

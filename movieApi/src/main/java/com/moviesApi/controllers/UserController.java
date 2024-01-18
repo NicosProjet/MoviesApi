@@ -22,83 +22,83 @@ import com.moviesApi.services.UserService;
 @RestController
 @RequestMapping("/movieApi/users")
 public class UserController {
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private SendEmailService sendEmailservice;
 
-	
+
 	//CRUD pour l'entité USER
-	
+
 	//CREATE
 	@PostMapping(consumes="application/json", produces = "application/json")
 	public ResponseEntity<UserDto> save(@RequestBody UserDto uDto){
-		
+
 		String to = uDto.getEmail();
-		
-        String subject = "Bienvenue sur l'application";
-        String body = "Bonjour " + uDto.getFirstName() + " " +uDto.getLastName()+ ",\n\nBienvenue sur notre application.";
-        
-        UserDto result = userService.saveOrUpdate(uDto);
-        sendEmailservice.sendEmail(to, subject, body);
+
+		String subject = "Bienvenue sur l'application";
+		String body = "Bonjour " + uDto.getFirstName() + " " +uDto.getLastName()+ ",\n\nBienvenue sur notre application.";
+
+		UserDto result = userService.saveOrUpdate(uDto);
+		sendEmailservice.sendEmail(to, subject, body);
 
 		return ResponseEntity
 				.status(HttpStatus.CREATED)
 				.body(result);
 	}
-	
+
 
 	@GetMapping(produces = "application/json")
 	public List<UserDto> getAll() {
 		return userService.getAll();
 	}
-	
+
 	//READ
 	@GetMapping(value="/{id}", produces = "application/json")
 	public UserDto getById(@PathVariable("id") long id){
 		return userService.getById(id);
 	}
-	
+
 	//UPDATE
 	@PutMapping(consumes="application/json", produces = "application/json")
 	public UserDto update(@RequestBody UserDto uDto){
 		return userService.saveOrUpdate(uDto);
 	}
-	
+
 	//DELETE
 	@DeleteMapping(value="/{id}")
 	public ResponseEntity<Long> delete(@PathVariable(name = "id")long id) throws Exception{
 		try {
-            userService.delete(id);
-            return ResponseEntity.status(HttpStatus.OK).body(id);
-        } catch (Exception e) {
-          
-            e.printStackTrace();
-            throw new Exception("Erreur suppression impossible");
-        }
-	}
-	
-	@PostMapping("/{userId}/add-friend/{friendId}")
-    public ResponseEntity<String> addFriend(@PathVariable Long userId, @PathVariable Long friendId) {
-        try {
-            userService.addFriend(userId, friendId);
-            return ResponseEntity.ok("Ami ajouté avec succès.");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Erreur lors de l'ajout de l'ami : " + e.getMessage());
-        }
-    }
-	
+			userService.delete(id);
+			return ResponseEntity.status(HttpStatus.OK).body(id);
+		} catch (Exception e) {
 
-    @DeleteMapping("/{userId}/delete-friend/{friendId}")
-    public ResponseEntity<String> deleteFriend(@PathVariable Long userId, @PathVariable Long friendId) {
-        try {
-            userService.deleteFriend(userId, friendId);
-            return ResponseEntity.ok("Ami supprimé avec succès.");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Erreur lors de la suppression de l'ami : " + e.getMessage());
-        }
-    }
-	
+			e.printStackTrace();
+			throw new Exception("Erreur suppression impossible");
+		}
+	}
+
+	@PostMapping("/{userId}/add-friend/{friendId}")
+	public ResponseEntity<String> addFriend(@PathVariable Long userId, @PathVariable Long friendId) {
+		try {
+			userService.addFriend(userId, friendId);
+			return ResponseEntity.ok("Ami ajouté avec succès.");
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body("Erreur lors de l'ajout de l'ami : " + e.getMessage());
+		}
+	}
+
+
+	@DeleteMapping("/{userId}/delete-friend/{friendId}")
+	public ResponseEntity<String> deleteFriend(@PathVariable Long userId, @PathVariable Long friendId) {
+		try {
+			userService.deleteFriend(userId, friendId);
+			return ResponseEntity.ok("Ami supprimé avec succès.");
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body("Erreur lors de la suppression de l'ami : " + e.getMessage());
+		}
+	}
+
 }

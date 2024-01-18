@@ -26,20 +26,20 @@ public class MovieInfoController {
 
 	@Autowired
 	private MovieService movieService;
-	
+
 
 
 
 	@PostMapping("/users/{userId}/movies")
 	public ResponseEntity<MovieInfoDto> save(@PathVariable long userId, @RequestBody MovieInfoDto mDto) {
-	    try {
-	        MovieInfoDto result = movieService.saveOrUpdate(userId, mDto);
-	        return ResponseEntity.status(HttpStatus.CREATED).body(result);
-	    } catch (IllegalArgumentException e) {
-	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-	    } catch (NoSuchElementException e) {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-	    }
+		try {
+			MovieInfoDto result = movieService.saveOrUpdate(userId, mDto);
+			return ResponseEntity.status(HttpStatus.CREATED).body(result);
+		} catch (IllegalArgumentException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		} catch (NoSuchElementException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
 	}
 
 	//READ
@@ -47,7 +47,7 @@ public class MovieInfoController {
 	public List<MovieInfoDto> getAll() {
 		return movieService.getAll();
 	}
-	
+
 	@GetMapping(value="/{id}", produces = "application/json")
 	public MovieInfoDto getById(@PathVariable("id") long id){
 		return movieService.getById(id);
@@ -55,10 +55,10 @@ public class MovieInfoController {
 
 
 	//UPDATE
-//	@PutMapping(consumes="application/json", produces = "application/json")
-//	public MovieInfoDto update(@RequestBody MovieInfoDto mDto){
-//		return movieService.saveOrUpdate(mDto);
-//	}
+	//	@PutMapping(consumes="application/json", produces = "application/json")
+	//	public MovieInfoDto update(@RequestBody MovieInfoDto mDto){
+	//		return movieService.saveOrUpdate(mDto);
+	//	}
 
 
 	//DELETE

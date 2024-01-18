@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
 			return result;
 		} else
 			System.out.println("test");
-			throw new Exception("Error : invalid credentials !");
+		throw new Exception("Error : invalid credentials !");
 	}
 
 	@Override
@@ -135,11 +135,11 @@ public class UserServiceImpl implements UserService {
 				// Les utilisateurs sont déjà amis, renvoie un message approprié
 				throw new IllegalArgumentException("Vous êtes déjà amis avec cette personne.");
 			}
-			
+
 			user.getFriends().add(friend);
 			friend.getFriends().add(user);
 
-			
+
 
 			userRepository.save(user);
 			userRepository.save(friend);
@@ -191,7 +191,7 @@ public class UserServiceImpl implements UserService {
 		}
 
 	}
-	
+
 	@Override
 	public boolean resetPassword(ChangePwdDto changePwdObj) throws Exception {
 		boolean expired = jwtTokenUtil.isTokenExpired(changePwdObj.getToken());
@@ -199,17 +199,17 @@ public class UserServiceImpl implements UserService {
 			throw new Exception("Error : Expired token, ask for reset again !");
 
 		String newPassword = HashTools.hashSHA512(changePwdObj.getPassword());
-		
+
 		//récupérer l'utilisateur par email	
 		String email = jwtTokenUtil.getUsernameFromToken(changePwdObj.getToken());
 		User u = userRepository.findByEmail(email);
-		
+
 		if(u!=null) {
 			String currentPwd = u.getPassword();
-			
+
 			if(newPassword.equals(currentPwd))
 				throw new Exception("Error : updating with the same old password !");
-			
+
 			u.setPassword(newPassword);
 			userRepository.saveAndFlush(u);
 			return true;

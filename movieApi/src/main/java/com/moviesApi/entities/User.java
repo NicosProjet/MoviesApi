@@ -29,54 +29,54 @@ import com.moviesApi.tools.MovieInfoConverter;
 @SuppressWarnings("serial")
 @Entity
 public class User implements Serializable {
-	
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
 
-    private String firstName;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
-    private String lastName;
+	private String firstName;
 
-    @Column(unique = true, nullable = false)
-    private String email;
+	private String lastName;
 
-    @Column(nullable = false)
-    private String password;
+	@Column(unique = true, nullable = false)
+	private String email;
 
-    // Map pour stocker les informations sur les films (id du film -> MovieInfo)
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @MapKey(name = "id")
-    @JsonManagedReference
-    @Convert(converter = MovieInfoConverter.class, attributeName = "value") // Convertisseur personnalisé
-    private Map<Long, MovieInfo> moviesInfo;
-    
-    
-    @ManyToMany
-    @JoinTable(
-        name = "user_friends",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "friend_id")
-    )
-    @JsonIgnore
-    private Set<User> friends;
+	@Column(nullable = false)
+	private String password;
 
-    public User() {
+	// Map pour stocker les informations sur les films (id du film -> MovieInfo)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@MapKey(name = "id")
+	@JsonManagedReference
+	@Convert(converter = MovieInfoConverter.class, attributeName = "value") // Convertisseur personnalisé
+	private Map<Long, MovieInfo> moviesInfo;
 
-    }
 
-    public User(long id, String firstName, String lastName, String email, String password,
-            Map<Long, MovieInfo> moviesInfo) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.moviesInfo = moviesInfo;
-    }
-    
-    
+	@ManyToMany
+	@JoinTable(
+			name = "user_friends",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "friend_id")
+			)
+	@JsonIgnore
+	private Set<User> friends;
+
+	public User() {
+
+	}
+
+	public User(long id, String firstName, String lastName, String email, String password,
+			Map<Long, MovieInfo> moviesInfo) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.moviesInfo = moviesInfo;
+	}
+
+
 
 	public Set<User> getFriends() {
 		return friends;
@@ -133,8 +133,8 @@ public class User implements Serializable {
 	public void setMoviesInfo(Map<Long, MovieInfo> moviesInfo) {
 		this.moviesInfo = moviesInfo;
 	}
-    
-    
-	
-	
+
+
+
+
 }

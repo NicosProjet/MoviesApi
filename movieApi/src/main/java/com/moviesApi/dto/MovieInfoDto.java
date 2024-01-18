@@ -3,10 +3,10 @@ package com.moviesApi.dto;
 public class MovieInfoDto {
 
 	private Long id;
-    private boolean hasSeen;
-    private int rating;
-    private UserDto user;
-    
+	private boolean hasSeen;
+	private int rating;
+	private UserDto user;
+
 
 
 	public MovieInfoDto() {
@@ -20,7 +20,7 @@ public class MovieInfoDto {
 		this.rating = rating;
 		this.user = user;
 	}
-	
+
 
 	public UserDto getUser() {
 		return user;
@@ -53,9 +53,9 @@ public class MovieInfoDto {
 	public void setRating(int rating) {
 		this.rating = rating;
 	} 
-	
-	
-    
-	
-    
+
+
+
+
+
 }
